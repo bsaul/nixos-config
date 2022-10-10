@@ -76,6 +76,8 @@ in
 
   home-manager.users.bsaul = {
     home.packages = with pkgs; [
+      haskellPackages.Agda
+      chromium
       direnv
       nix-direnv
       vscode.fhs
