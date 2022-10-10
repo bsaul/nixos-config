@@ -75,7 +75,7 @@ in
   };
 
   home-manager.users.bsaul = {
-    packages = with pkgs; [
+    home.packages = with pkgs; [
       direnv
       nix-direnv
       vscode.fhs
