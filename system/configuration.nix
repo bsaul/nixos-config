@@ -1,9 +1,16 @@
 { config, pkgs, ... }:
 
+let
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
+in
+
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+
+      # Include home-manager module
+      (import "${home-manager}/nixos") 
     ];
 
   # Allow unfree/proprietary software
@@ -65,8 +72,20 @@
   users.users.bsaul = {
      isNormalUser = true;
      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-     packages = with pkgs; [
-     ];
+  };
+
+  home-manager.users.bsaul = {
+    packages = with pkgs; [
+      direnv
+      nix-direnv
+      vscode.fhs
+    ];
+
+    programs.git = {
+        enable = true;
+        userName  = "bsaul";
+        userEmail = "bradleysaul@fastmail.com";
+    };
   };
 
   # List packages installed in system profile. To search, run:
@@ -74,14 +93,11 @@
   environment.systemPackages = with pkgs; [ 
      _1password
      _1password-gui
-     direnv
      exa
      git
      firefox
      htop
-     nix-direnv
      vim
-     vscode.fhs
      wget
   ];
 
@@ -104,13 +120,6 @@
       polkitPolicyOwners = [ "bsaul" ];
     };
   };
-
-  # https://nixos.wiki/wiki/Git
-  programs.git = {
-    enable = true;
-    userName  = "Bradley Saul";
-    userEmail = "bradleysaul@fastmail.com";
-  };  
 
   # List services that you want to enable:
 
