@@ -79,9 +79,14 @@ in
       haskellPackages.Agda
       chromium
       direnv
+      dropbox-cli
+      # maestral # currently fails to start maybe due to https://github.com/samschott/maestral/issues/734
+      # maestral-gui
       nix-direnv
       vscode.fhs
     ];
+
+    programs.bash.enable = true;
 
     programs.git = {
         enable = true;
@@ -107,8 +112,8 @@ in
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
+  #    enable = true;
+  #    enableSSHSupport = true;
   # };
 
   programs = {
@@ -125,6 +130,7 @@ in
 
   # List services that you want to enable:
 
+  # services.gnome.gnome-keyring.enable = true;
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
