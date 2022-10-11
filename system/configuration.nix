@@ -13,6 +13,8 @@ in
       (import "${home-manager}/nixos") 
     ];
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Allow unfree/proprietary software
   nixpkgs.config.allowUnfree = true;
 
@@ -86,12 +88,32 @@ in
       vscode.fhs
     ];
 
+    programs.home-manager.enable = true;
+
     programs.bash.enable = true;
+    programs.zsh.enable = true;
+
+    programs.direnv = {
+      enable = true;
+      # enableBashIntegration = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
 
     programs.git = {
         enable = true;
         userName  = "bsaul";
         userEmail = "bradleysaul@fastmail.com";
+        extraConfig = {
+          init = {
+            defaultBranch = "main";
+          };
+        };
+        ignores = [
+          ".DS_Store"
+          ".direnv*"
+        ];
+
     };
   };
 
