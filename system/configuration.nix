@@ -3,16 +3,28 @@
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
 in
-
 {
+  # Add NUR (https://nur.nix-community.org/)
+  # for firefox addons
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      inherit pkgs;
+    };
+  };
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
 
       # Include home-manager module
-      (import "${home-manager}/nixos") 
+      (import "${home-manager}/nixos")
+
     ];
 
+  # Home manager settings
+  home-manager.useGlobalPkgs = true;
+
+  # Nix settings
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Allow unfree/proprietary software
@@ -82,11 +94,43 @@ in
       chromium
       direnv
       dropbox-cli
-      # maestral # currently fails to start maybe due to https://github.com/samschott/maestral/issues/734
+      exa
+      # currently fails to start maybe due to https://github.com/samschott/maestral/issues/734
+      # maestral
       # maestral-gui
       nix-direnv
-      vscode.fhs
+      nixpkgs-fmt
+      # Full LaTeX installation with all packages
+      texlive.combined.scheme-full
+      vim
+      # vscode.fhs
+      wget
     ];
+    
+    # got most of these ideas from:
+    # https://shen.hong.io/nixos-for-philosophy-installing-firefox-latex-vscodium/
+    programs.firefox = {
+      enable = true;
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        ublock-origin
+        darkreader
+        onepassword-password-manager
+      ];
+      profiles.default = {
+          id = 0;
+          name = "Default";
+          settings = {
+              "browser.startup.homepage" = "https://functionalstatistics.com";
+              # Disable Pocket Integration
+              "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
+              "extensions.pocket.enabled" = false;
+              "extensions.pocket.api" = "";
+              "extensions.pocket.oAuthConsumerKey" = "";
+              "extensions.pocket.showHome" = false;
+              "extensions.pocket.site" = "";
+          };
+      };
+    };
 
     programs.home-manager.enable = true;
 
@@ -99,6 +143,12 @@ in
       enableZshIntegration = true;
       nix-direnv.enable = true;
     };
+
+    programs.vscode = {
+      enable = true;
+    };
+
+    programs.htop.enable = true;
 
     programs.git = {
         enable = true;
@@ -122,12 +172,8 @@ in
   environment.systemPackages = with pkgs; [ 
      _1password
      _1password-gui
-     exa
-     git
-     firefox
-     htop
-     vim
-     wget
+    #  vim
+    #  wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
