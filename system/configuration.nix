@@ -92,21 +92,54 @@ in
     home.packages = with pkgs; [
       haskellPackages.Agda
       chromium
-      direnv
       dropbox-cli
-      exa
       # currently fails to start maybe due to https://github.com/samschott/maestral/issues/734
       # maestral
       # maestral-gui
-      nix-direnv
       nixpkgs-fmt
       # Full LaTeX installation with all packages
       texlive.combined.scheme-full
       vim
-      # vscode.fhs
       wget
     ];
-    
+
+    programs = {
+      # Machine management
+      home-manager.enable = true;
+      htop.enable = true;
+      
+      # Shells/Shell tools
+      bat.enable = true;
+      bash.enable = true;
+      exa.enable = true;
+      zsh.enable = true;
+      direnv = {
+        enable = true;
+        # enableBashIntegration = true;
+        enableZshIntegration = true;
+        nix-direnv.enable = true;
+      };
+
+      # Developer tools
+      git = {
+        enable = true;
+        userName  = "bsaul";
+        userEmail = "bradleysaul@fastmail.com";
+        extraConfig = {
+          init = {
+            defaultBranch = "main";
+          };
+        };
+        ignores = [
+          ".DS_Store"
+          ".direnv*"
+        ];
+      };
+      vscode = {
+        enable = true;
+      };
+    };
+
     # got most of these ideas from:
     # https://shen.hong.io/nixos-for-philosophy-installing-firefox-latex-vscodium/
     programs.firefox = {
@@ -131,40 +164,6 @@ in
           };
       };
     };
-
-    programs.home-manager.enable = true;
-
-    programs.bash.enable = true;
-    programs.zsh.enable = true;
-
-    programs.direnv = {
-      enable = true;
-      # enableBashIntegration = true;
-      enableZshIntegration = true;
-      nix-direnv.enable = true;
-    };
-
-    programs.vscode = {
-      enable = true;
-    };
-
-    programs.htop.enable = true;
-
-    programs.git = {
-        enable = true;
-        userName  = "bsaul";
-        userEmail = "bradleysaul@fastmail.com";
-        extraConfig = {
-          init = {
-            defaultBranch = "main";
-          };
-        };
-        ignores = [
-          ".DS_Store"
-          ".direnv*"
-        ];
-
-    };
   };
 
   # List packages installed in system profile. To search, run:
@@ -172,13 +171,10 @@ in
   environment.systemPackages = with pkgs; [ 
      _1password
      _1password-gui
-    #  vim
-    #  wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
   # programs.gnupg.agent = {
   #    enable = true;
   #    enableSSHSupport = true;
@@ -207,11 +203,6 @@ in
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
