@@ -1,7 +1,9 @@
 { config, pkgs, ... }:
 
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
+  home-manager = 
+    builtins.fetchTarball 
+    "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
 in
 {
   # Add NUR (https://nur.nix-community.org/)
@@ -21,8 +23,7 @@ in
 
     ];
 
-  # Home manager settings
-  home-manager.useGlobalPkgs = true;
+
 
   # Nix settings
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -88,6 +89,9 @@ in
      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
+  # Home manager settings
+  home-manager.useGlobalPkgs = true;
+
   home-manager.users.bsaul = {
     home.packages = with pkgs; [
       haskellPackages.Agda
@@ -120,7 +124,7 @@ in
         nix-direnv.enable = true;
       };
 
-      # Developer tools
+      # Developer/Productivity tools
       git = {
         enable = true;
         userName  = "bsaul";
@@ -145,9 +149,11 @@ in
     programs.firefox = {
       enable = true;
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        # additional at http://nur.nix-community.org/repos/rycee/
         ublock-origin
         darkreader
         onepassword-password-manager
+        markdownload
       ];
       profiles.default = {
           id = 0;
@@ -162,6 +168,24 @@ in
               "extensions.pocket.showHome" = false;
               "extensions.pocket.site" = "";
           };
+      };
+    };
+    
+    services = {
+      espanso = {
+        enable = true;
+        settings = { matches = [
+          { trigger = ":zn";
+            replace = "{{timestamp}} ";
+            vars = [
+              { name = "timestamp";
+                type = "date";
+                params = {format = "%Y%m%d%H%M%S";};
+              }
+            ];
+          }
+        ];
+        };
       };
     };
   };
