@@ -124,6 +124,16 @@ in
         nix-direnv.enable = true;
       };
 
+      ssh = {
+        enable = true;
+        # https://developer.1password.com/docs/ssh/
+        extraConfig = 
+        ''
+        Host *
+               IdentityAgent ~/.1password/agent.sock
+        '';
+      };
+
       # Developer/Productivity tools
       git = {
         enable = true;
