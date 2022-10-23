@@ -100,11 +100,16 @@ in
       # currently fails to start maybe due to https://github.com/samschott/maestral/issues/734
       # maestral
       # maestral-gui
+
       nixpkgs-fmt
       # Full LaTeX installation with all packages
       texlive.combined.scheme-full
       vim
       wget
+
+      # spellchecking
+      hunspell
+      hunspellDicts.en_US
     ];
 
     programs = {
