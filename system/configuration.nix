@@ -93,21 +93,40 @@ in
   home-manager.useGlobalPkgs = true;
 
   home-manager.users.bsaul = {
+    home.shellAliases = {
+      ".." = "cd ..";
+      "ll" = "exa -l";
+      "diff" = "colordiff";
+      "cat" = "bat";
+    };
     home.packages = with pkgs; [
+
+      # Programming
       haskellPackages.Agda
-      chromium
+
+      # Research/Writing
+      jabref
+      libsForQt5.okular
+      texlive.combined.scheme-full # Full LaTeX installation with all packages
+
+
+      # "Productivity"
       dropbox-cli
-      # currently fails to start maybe due to https://github.com/samschott/maestral/issues/734
+      # maestral currently fails to start
+      # maybe due to https://github.com/samschott/maestral/issues/734 (?)
       # maestral
       # maestral-gui
 
-      nixpkgs-fmt
-      # Full LaTeX installation with all packages
-      texlive.combined.scheme-full
+      # Developer tools
       vim
       wget
+      nixpkgs-fmt
+      ripgrep
+      colordiff
 
-      # spellchecking
+      # Spellchecking
+      # To get spellright VSCode extension working:
+      # ln -s ~/.nix-profile/share/hunspell/* ~/.config/Code/Dictionaries
       hunspell
       hunspellDicts.en_US
     ];
@@ -185,7 +204,6 @@ in
           };
       };
     };
-    
     services = {
       espanso = {
         enable = true;
