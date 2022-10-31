@@ -107,6 +107,7 @@ in
       # Research/Writing
       jabref
       libsForQt5.okular
+      pandoc
       texlive.combined.scheme-full # Full LaTeX installation with all packages
 
 
@@ -171,6 +172,7 @@ in
         ignores = [
           ".DS_Store"
           ".direnv*"
+          ".vscode/**"
         ];
       };
       vscode = {
