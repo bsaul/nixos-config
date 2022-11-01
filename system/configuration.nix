@@ -101,31 +101,33 @@ in
     };
     home.packages = with pkgs; [
 
-      # Programming
+      # programming
       haskellPackages.Agda
 
-      # Research/Writing
+      # research, writing
       jabref
       libsForQt5.okular
       pandoc
       texlive.combined.scheme-full # Full LaTeX installation with all packages
 
+      # conference
+      zoom-us
 
-      # "Productivity"
+      # "productivity"
       dropbox-cli
       # maestral currently fails to start
       # maybe due to https://github.com/samschott/maestral/issues/734 (?)
       # maestral
       # maestral-gui
 
-      # Developer tools
+      # developer tools
       vim
       wget
       nixpkgs-fmt
       ripgrep
       colordiff
 
-      # Spellchecking
+      # spellcheck
       # To get spellright VSCode extension working:
       # ln -s ~/.nix-profile/share/hunspell/* ~/.config/Code/Dictionaries
       hunspell
