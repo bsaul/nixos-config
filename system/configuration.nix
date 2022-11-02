@@ -24,9 +24,20 @@ in
     ];
 
 
-
   # Nix settings
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    # Binary Cache for Haskell.nix
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+    ];
+    substituters = [
+      "https://cache.nixos.org/"
+      "https://cache.iog.io"
+    ];
+  };
+
 
   # Allow unfree/proprietary software
   nixpkgs.config.allowUnfree = true;
@@ -102,7 +113,10 @@ in
     home.packages = with pkgs; [
 
       # programming
+      ## Agda
       haskellPackages.Agda
+      ## Unison: https://github.com/ceedubs/unison-nix
+      (builtins.getFlake (github:ceedubs/unison-nix)).packages.${builtins.currentSystem}.ucm
 
       # research, writing
       jabref
