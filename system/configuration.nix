@@ -129,6 +129,7 @@ in
 
       # "productivity"
       dropbox-cli
+      tusk
       # maestral currently fails to start
       # maybe due to https://github.com/samschott/maestral/issues/734 (?)
       # maestral
