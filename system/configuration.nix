@@ -129,7 +129,7 @@ in
 
       # "productivity"
       dropbox-cli
-      tusk
+      tusk # temp for evernote migration
       # maestral currently fails to start
       # maybe due to https://github.com/samschott/maestral/issues/734 (?)
       # maestral
@@ -235,6 +235,9 @@ in
                 params = {format = "%Y%m%d%H%M%S";};
               }
             ];
+          }
+          { trigger = ":nn";
+            replace = "---\ntags: []\n---\n";
           }
         ];
         };
