@@ -76,6 +76,14 @@ in
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.windowManager.xmonad = {
+    enable = true;
+    extraPackages = haskellPackages: [
+      haskellPackages.xmonad-contrib
+      haskellPackages.containers
+    ];
+    enableContribAndExtras = true;
+  };
   
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -129,7 +137,6 @@ in
 
       # "productivity"
       dropbox-cli
-      tusk # temp for evernote migration
       # maestral currently fails to start
       # maybe due to https://github.com/samschott/maestral/issues/734 (?)
       # maestral
