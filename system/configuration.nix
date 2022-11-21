@@ -50,7 +50,7 @@ in
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -70,19 +70,34 @@ in
   # Enable fingerprint support
   services.fprintd.enable = true;
 
+  # dbus = {
+  #   enable = true;
+  #   socketActivated = true;
+  # };
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.windowManager.xmonad = {
+  services.xserver = {
     enable = true;
-    extraPackages = haskellPackages: [
-      haskellPackages.xmonad-contrib
-      haskellPackages.containers
-    ];
-    enableContribAndExtras = true;
+
+    # displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+    # startDbusSession = true;
+    # displayManager = {  
+      # defaultSession = "none+xmonad";
+    # };l
+  
+    # Enable touchpad support.
+    libinput.enable = true;
+
+    # Enable xmonad.
+    windowManager.xmonad = {
+      enable = true;
+      enableContribAndExtras = true;
+      extraPackages = haskellPackages: [
+        haskellPackages.xmonad-contrib
+        haskellPackages.xmobar
+        haskellPackages.dbus
+      ];
+    };
   };
   
   # Configure keymap in X11
@@ -99,8 +114,6 @@ in
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bsaul = {
@@ -160,6 +173,12 @@ in
       # Machine management
       home-manager.enable = true;
       htop.enable = true;
+
+      # Displays
+      autorandr.enable = true;
+
+      # application launcher
+      rofi.enable = true;
       
       # Shells/Shell tools
       bat.enable = true;
@@ -280,7 +299,7 @@ in
 
   # List services that you want to enable:
 
-  # services.gnome.gnome-keyring.enable = true;
+  services.gnome.gnome-keyring.enable = true;
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
