@@ -79,11 +79,12 @@ in
     enable = true;
 
     # displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
+    # desktopManager.gnome.enable = true;
+    desktopManager.xterm.enable = false;
     # startDbusSession = true;
-    # displayManager = {  
-      # defaultSession = "none+xmonad";
-    # };l
+    displayManager = {  
+      defaultSession = "none+xmonad";
+    };
   
     # Enable touchpad support.
     libinput.enable = true;
@@ -95,7 +96,7 @@ in
       extraPackages = haskellPackages: [
         haskellPackages.xmonad-contrib
         haskellPackages.xmobar
-        haskellPackages.dbus
+        # haskellPackages.dbus
       ];
     };
   };
@@ -119,6 +120,7 @@ in
   users.users.bsaul = {
      isNormalUser = true;
      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+     shell = pkgs.zsh;
   };
 
   # Home manager settings
@@ -131,6 +133,12 @@ in
       "diff" = "colordiff";
       "cat" = "bat";
     };
+
+    home.sessionVariables = {
+      BROWSER = "firefox";
+      TERMINAL = "kitty";
+    };
+
     home.packages = with pkgs; [
 
       # programming
@@ -180,6 +188,9 @@ in
       # application launcher
       rofi.enable = true;
       
+      # terminal emulator
+      kitty.enable = true;
+
       # Shells/Shell tools
       bat.enable = true;
       bash.enable = true;
@@ -277,6 +288,8 @@ in
      _1password
      _1password-gui
   ];
+  environment.sessionVariables.TERMINAL = ["kitty"];
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -286,6 +299,7 @@ in
   # };
 
   programs = {
+    zsh.enable = true;
     _1password = {
       enable = true;
       gid = 1000;
