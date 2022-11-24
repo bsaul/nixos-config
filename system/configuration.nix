@@ -70,6 +70,7 @@ in
   # Enable fingerprint support
   services.fprintd.enable = true;
 
+  # services.picom.enable = true;
   # dbus = {
   #   enable = true;
   #   socketActivated = true;
@@ -78,27 +79,30 @@ in
   services.xserver = {
     enable = true;
 
-    # displayManager.gdm.enable = true;
-    # desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
     desktopManager.xterm.enable = false;
     # startDbusSession = true;
-    displayManager = {  
-      defaultSession = "none+xmonad";
-    };
+    # displayManager = {  
+    #   defaultSession = "none+xmonad";
+    # };
   
     # Enable touchpad support.
     libinput.enable = true;
 
     # Enable xmonad.
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-      extraPackages = haskellPackages: [
-        haskellPackages.xmonad-contrib
-        haskellPackages.xmobar
-        # haskellPackages.dbus
-      ];
-    };
+    # firefox/vscode are REALLY laggy using xmonad
+    # and I can't figure out why
+    # windowManager.xmonad = {
+    #   enable = true;
+    #   enableContribAndExtras = true;
+    #   extraPackages = haskellPackages: [
+    #     haskellPackages.xmonad-contrib
+    #     haskellPackages.xmobar
+    #     # haskellPackages.dbus
+    #   ];
+    #   config = ./xmonad.hs;
+    # };
   };
   
   # Configure keymap in X11
@@ -169,6 +173,9 @@ in
       nixpkgs-fmt
       ripgrep
       colordiff
+
+      # machine tools
+      acpi
 
       # spellcheck
       # To get spellright VSCode extension working:
