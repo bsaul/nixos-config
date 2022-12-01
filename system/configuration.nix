@@ -157,7 +157,9 @@ in
       pandoc
       texlive.combined.scheme-full # Full LaTeX installation with all packages
 
-      # conference
+      # messsaging/conference
+      zulip
+      zulip-term
       zoom-us
 
       # "productivity"
