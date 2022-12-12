@@ -158,6 +158,7 @@ in
       texlive.combined.scheme-full # Full LaTeX installation with all packages
 
       # messsaging/conference
+      discord
       zulip
       zulip-term
       zoom-us
