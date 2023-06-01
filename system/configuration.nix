@@ -165,6 +165,7 @@ in
 
       # "productivity"
       dropbox-cli
+      libreoffice
       # maestral currently fails to start
       # maybe due to https://github.com/samschott/maestral/issues/734 (?)
       # maestral
