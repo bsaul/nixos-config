@@ -166,6 +166,9 @@ in
       # "productivity"
       dropbox-cli
       libreoffice-qt
+      slack
+      # python311
+
       # maestral currently fails to start
       # maybe due to https://github.com/samschott/maestral/issues/734 (?)
       # maestral
@@ -233,6 +236,9 @@ in
           init = {
             defaultBranch = "main";
           };
+          push = {
+            autoSetupRemote = true;
+          };
         };
         ignores = [
           ".DS_Store"
@@ -298,6 +304,8 @@ in
   environment.systemPackages = with pkgs; [ 
      _1password
      _1password-gui
+    #  coreutils-full
+    # (python3.withPackages(ps: with ps; [ dbus-python ]))
   ];
   environment.sessionVariables.TERMINAL = ["kitty"];
 
