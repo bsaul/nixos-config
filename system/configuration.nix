@@ -119,11 +119,13 @@ in
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
+  # Add docker
+  virtualisation.docker.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bsaul = {
      isNormalUser = true;
-     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
      shell = pkgs.zsh;
   };
 
