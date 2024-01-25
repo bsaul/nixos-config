@@ -21,6 +21,8 @@ in
       # Include home-manager module
       (import "${home-manager}/nixos")
 
+      # Use cachix
+      ./cachix.nix
     ];
 
 
@@ -164,6 +166,9 @@ in
       zulip
       zulip-term
       zoom-us
+
+      # networking
+      openconnect
 
       # "productivity"
       dropbox-cli
