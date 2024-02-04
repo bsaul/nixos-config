@@ -149,15 +149,10 @@ in
 
     home.packages = with pkgs; [
 
-      # programming
-      ## Agda
-      haskellPackages.Agda
-      ## Unison: https://github.com/ceedubs/unison-nix
-      (builtins.getFlake (github:ceedubs/unison-nix)).packages.${builtins.currentSystem}.ucm
-
       # research, writing
       jabref
       libsForQt5.okular
+      libsForQt5.poppler
       pandoc
       texlive.combined.scheme-full # Full LaTeX installation with all packages
 
@@ -174,7 +169,6 @@ in
       dropbox-cli
       libreoffice-qt
       slack
-      # python311
 
       # maestral currently fails to start
       # maybe due to https://github.com/samschott/maestral/issues/734 (?)
