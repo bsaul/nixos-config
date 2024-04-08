@@ -3,7 +3,7 @@
 let
   home-manager = 
     builtins.fetchTarball 
-    "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
+    "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
 in
 {
   # Add NUR (https://nur.nix-community.org/)
@@ -62,7 +62,7 @@ in
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
