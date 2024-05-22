@@ -135,6 +135,7 @@ in
   home-manager.useGlobalPkgs = true;
 
   home-manager.users.bsaul = {
+    home.stateVersion = "22.05";
     home.shellAliases = {
       ".." = "cd ..";
       "ll" = "exa -l";
@@ -256,13 +257,6 @@ in
     # https://shen.hong.io/nixos-for-philosophy-installing-firefox-latex-vscodium/
     programs.firefox = {
       enable = true;
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        # additional at http://nur.nix-community.org/repos/rycee/
-        ublock-origin
-        darkreader
-        onepassword-password-manager
-        markdownload
-      ];
       profiles.default = {
           id = 0;
           name = "Default";
@@ -276,28 +270,34 @@ in
               "extensions.pocket.showHome" = false;
               "extensions.pocket.site" = "";
           };
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+            # additional at http://nur.nix-community.org/repos/rycee/
+            ublock-origin
+            darkreader
+            onepassword-password-manager
+            markdownload
+          ];
       };
     };
     services = {
       espanso = {
         enable = true;
-        settings = { matches = [
-          { trigger = ":zn";
-            replace = "{{timestamp}} ";
-            vars = [
-              { name = "timestamp";
-                type = "date";
-                params = {format = "%Y%m%d%H%M%S";};
-              }
-            ];
-          }
-          { trigger = ":nn";
-            replace = "---\ntags: []\n---\n";
-          }
-        ];
+        # matches = [
+        #   { trigger = ":zn";
+        #     replace = "{{timestamp}} ";
+        #     vars = [
+        #       { name = "timestamp";
+        #         type = "date";
+        #         params = {format = "%Y%m%d%H%M%S";};
+        #       }
+        #     ];
+        #   }
+        #   { trigger = ":nn";
+        #     replace = "---\ntags: []\n---\n";
+        #   }
+        # ];
         };
       };
-    };
   };
 
   # List packages installed in system profile. To search, run:
@@ -322,11 +322,9 @@ in
     zsh.enable = true;
     _1password = {
       enable = true;
-      gid = 1000;
     };
     _1password-gui = {
       enable = true;
-      gid = 1001;
       polkitPolicyOwners = [ "bsaul" ];
     };
   };
