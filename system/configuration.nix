@@ -210,7 +210,7 @@ in
       # Shells/Shell tools
       bat.enable = true;
       bash.enable = true;
-      exa.enable = true;
+      eza.enable = true;
       zsh.enable = true;
       direnv = {
         enable = true;
