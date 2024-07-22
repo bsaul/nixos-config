@@ -4,6 +4,7 @@ let
   home-manager = 
     builtins.fetchTarball 
     "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
+
 in
 {
   # Add NUR (https://nur.nix-community.org/)
@@ -282,20 +283,47 @@ in
     services = {
       espanso = {
         enable = true;
-        # matches = [
-        #   { trigger = ":zn";
-        #     replace = "{{timestamp}} ";
-        #     vars = [
-        #       { name = "timestamp";
-        #         type = "date";
-        #         params = {format = "%Y%m%d%H%M%S";};
-        #       }
-        #     ];
-        #   }
-        #   { trigger = ":nn";
-        #     replace = "---\ntags: []\n---\n";
-        #   }
-        # ];
+        matches = {
+            base = {
+              matches = [
+                {
+                  trigger = ":zn";
+                  replace = "{{timestamp}} ";
+                }
+                { 
+                  trigger = ":nn";
+                  replace = "---\ntags: []\n---\n";
+                }
+                {
+                  trigger = ":eqsetoid";
+                  replace = "begin\n ? \n≈⟨ ? ⟩\n ? ∎";
+                }
+                {
+                  trigger = ":step";
+                  replace = "\n≈⟨ ? ⟩\n ?";
+                }
+              ];
+            };
+            global_vars = {
+              global_vars = [
+                {
+                  name = "currentdate";
+                  type = "date";
+                  params = {format = "%d/%m/%Y";};
+                }
+                {
+                  name = "currenttime";
+                  type = "date";
+                  params = {format = "%R";};
+                }
+                { 
+                  name = "timestamp";
+                  type = "date";
+                  params = {format = "%Y%m%d%H%M%S";};
+                }
+              ];
+            };
+          };
         };
       };
   };
