@@ -3,7 +3,7 @@
 let
   home-manager = 
     builtins.fetchTarball 
-    "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
+    "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
 
 in
 {
@@ -78,6 +78,9 @@ in
   #   enable = true;
   #   socketActivated = true;
   # };
+  # Enable touchpad support.
+  services.libinput.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -89,9 +92,6 @@ in
     # displayManager = {  
     #   defaultSession = "none+xmonad";
     # };
-  
-    # Enable touchpad support.
-    libinput.enable = true;
 
     # Enable xmonad.
     # firefox/vscode are REALLY laggy using xmonad
@@ -152,11 +152,9 @@ in
     home.packages = with pkgs; [
 
       # research, writing
-      jabref
       libsForQt5.okular
       libsForQt5.poppler
       pandoc
-      texlive.combined.scheme-full # Full LaTeX installation with all packages
 
       # messsaging/conference
       discord
@@ -171,11 +169,8 @@ in
       dropbox-cli
       libreoffice-qt
       slack
-
-      # maestral currently fails to start
-      # maybe due to https://github.com/samschott/maestral/issues/734 (?)
-      # maestral
-      # maestral-gui
+      maestral
+      maestral-gui
 
       # developer tools
       vim
@@ -183,6 +178,9 @@ in
       nixpkgs-fmt
       ripgrep
       colordiff
+      
+      # fonts
+      julia-mono
 
       # machine tools
       acpi
