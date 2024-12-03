@@ -15,9 +15,10 @@
   };
 
   outputs = { self, nixpkgs, sops-nix, home-manager, nur, ... }@inputs: 
-  
+
   
   {
+
     # Please replace my-nixos with your hostname
     nixosConfigurations.bsaul = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";

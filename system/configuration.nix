@@ -4,9 +4,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      
-      # Include sops module
-      # <sops-nix/modules/sops>
 
       # Use cachix
       ./cachix.nix
@@ -27,23 +24,8 @@
     ];
   };
 
-
   # Allow unfree/proprietary software
   nixpkgs.config.allowUnfree = true;
-
-
-  # sops = {
-  #   # age.keyFile = "/home/<your username>/.config/sops/age/keys.txt"; # must have no password!
-
-  #   defaultSopsFile = ./secrets.yaml;
-  #   defaultSymlinkPath = "/run/user/1000/secrets";
-  #   defaultSecretsMountPoint = "/run/user/1000/secrets.d";
-
-  #   # secrets.fastmail_smtp_key_key = {
-  #   #   # sopsFile = ./secrets.yml.enc; # optionally define per-secret files
-  #   #   path = "${config.sops.defaultSymlinkPath}/fastmail_smtp_key";
-  #   # };
-  # };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -132,25 +114,11 @@
      shell = pkgs.zsh;
   };
 
-  # sops = {
-  #   age.keyFile = "/home/bsaul/.config/sops/age/keys.txt";
-
-  #   defaultSopsFile = ./secrets.yaml;
-  #   defaultSymlinkPath = "/run/user/1000/secrets";
-  #   # defaultSecretsMountPoint = "/run/user/1000/secrets.d";
-
-  #   # secrets.fastmail_smtp_key = {
-  #   #   path = "${config.sops.defaultSymlinkPath}/fastmail_smtp_key";
-  #   # };
-  # };
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [ 
      _1password-cli
      _1password-gui
-    #  coreutils-full
-    # (python3.withPackages(ps: with ps; [ dbus-python ]))
   ];
   environment.sessionVariables.TERMINAL = ["kitty"];
 
