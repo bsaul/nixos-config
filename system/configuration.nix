@@ -1,26 +1,37 @@
 { config, pkgs, ... }:
 
 let
-  home-manager = 
-    builtins.fetchTarball 
-    "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
+  # home-manager = 
+  #   builtins.fetchTarball 
+  #   "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
+  # sops-nix = 
+  #   builtins.fetchTarball
+  #   "https://github.com/Mic92/sops-nix/archive/master.tar.gz";
 
 in
 {
   # Add NUR (https://nur.nix-community.org/)
   # for firefox addons
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-      inherit pkgs;
-    };
-  };
+  # nixpkgs.config.packageOverrides = pkgs: {
+  #   nur = 
+  #     import 
+  #     (builtins.fetchTarball 
+  #     "https://github.com/nix-community/NUR/archive/master.tar.gz")
+  #     {
+  #     inherit pkgs;
+  #   };
+  # };
 
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
 
       # Include home-manager module
-      (import "${home-manager}/nixos")
+      # (import "${home-manager}/nixos")
+      # <home-manager/modules/sops>
+      
+      # Include sops module
+      # <sops-nix/modules/sops>
 
       # Use cachix
       ./cachix.nix
@@ -50,7 +61,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "bsaul"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -119,8 +130,8 @@ in
   # services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  # sound.enable = true;
+  # hardware.pulseaudio.enable = true;
 
   # Add docker
   virtualisation.docker.enable = true;
@@ -132,204 +143,232 @@ in
      shell = pkgs.zsh;
   };
 
+  # sops = {
+  #   age.keyFile = "/home/bsaul/.config/sops/age/keys.txt";
+
+  #   defaultSopsFile = ./secrets.yaml;
+  #   defaultSymlinkPath = "/run/user/1000/secrets";
+  #   # defaultSecretsMountPoint = "/run/user/1000/secrets.d";
+
+  #   # secrets.fastmail_smtp_key = {
+  #   #   path = "${config.sops.defaultSymlinkPath}/fastmail_smtp_key";
+  #   # };
+  # };
+
   # Home manager settings
   home-manager.useGlobalPkgs = true;
+  # home-manager.sharedModules = [
+  #    (import "${sops-nix}/modules/home-manager").sops
+  #   # (sops-nix.homeManagerModules.sops
+  # ];
 
-  home-manager.users.bsaul = {
-    home.stateVersion = "22.05";
-    home.shellAliases = {
-      ".." = "cd ..";
-      "ll" = "exa -l";
-      "diff" = "colordiff";
-      "cat" = "bat";
-    };
+  # home-manager.users.bsaul = {
+  #   home.stateVersion = "22.05";
+  #   home.shellAliases = {
+  #     ".." = "cd ..";
+  #     "ll" = "exa -l";
+  #     "diff" = "colordiff";
+  #     "cat" = "bat";
+  #   };
 
-    home.sessionVariables = {
-      BROWSER = "firefox";
-      TERMINAL = "kitty";
-    };
+  #   home.sessionVariables = {
+  #     BROWSER = "firefox";
+  #     TERMINAL = "kitty";
+  #   };
 
-    home.packages = with pkgs; [
+  #   home.packages = with pkgs; [
 
-      # research, writing
-      libsForQt5.okular
-      libsForQt5.poppler
-      pandoc
+  #     # research, writing
+  #     libsForQt5.okular
+  #     libsForQt5.poppler
+  #     pandoc
 
-      # messsaging/conference
-      discord
-      zulip
-      zulip-term
-      zoom-us
+  #     # messsaging/conference
+  #     discord
+  #     zulip
+  #     zulip-term
+  #     zoom-us
 
-      # networking
-      openconnect
+  #     # networking
+  #     openconnect
 
-      # "productivity"
-      dropbox-cli
-      libreoffice-qt
-      slack
-      maestral
-      maestral-gui
+  #     # "productivity"
+  #     dropbox-cli
+  #     libreoffice-qt
+  #     slack
+  #     maestral
+  #     maestral-gui
 
-      # developer tools
-      vim
-      wget
-      nixpkgs-fmt
-      ripgrep
-      colordiff
+  #     # developer tools
+  #     vim
+  #     wget
+  #     nixpkgs-fmt
+  #     ripgrep
+  #     colordiff
       
-      # fonts
-      julia-mono
+  #     # fonts
+  #     julia-mono
 
-      # machine tools
-      acpi
+  #     # machine tools
+  #     acpi
+  #     sops
+  #     age
 
-      # spellcheck
-      # To get spellright VSCode extension working:
-      # ln -s ~/.nix-profile/share/hunspell/* ~/.config/Code/Dictionaries
-      hunspell
-      hunspellDicts.en_US
-    ];
+  #     # spellcheck
+  #     # To get spellright VSCode extension working:
+  #     # ln -s ~/.nix-profile/share/hunspell/* ~/.config/Code/Dictionaries
+  #     hunspell
+  #     hunspellDicts.en_US
+  #   ];
 
-    programs = {
-      # Machine management
-      home-manager.enable = true;
-      htop.enable = true;
+  #   programs = {
+  #     # Machine management
+  #     home-manager.enable = true;
+  #     htop.enable = true;
 
-      # Displays
-      autorandr.enable = true;
+  #     # Displays
+  #     autorandr.enable = true;
 
-      # application launcher
-      rofi.enable = true;
+  #     # application launcher
+  #     rofi.enable = true;
       
-      # terminal emulator
-      kitty.enable = true;
+  #     # terminal emulator
+  #     kitty.enable = true;
 
-      # Shells/Shell tools
-      bat.enable = true;
-      bash.enable = true;
-      eza.enable = true;
-      zsh.enable = true;
-      direnv = {
-        enable = true;
-        # enableBashIntegration = true;
-        enableZshIntegration = true;
-        nix-direnv.enable = true;
-      };
+  #     # Shells/Shell tools
+  #     bat.enable = true;
+  #     bash.enable = true;
+  #     eza.enable = true;
+  #     zsh.enable = true;
+  #     direnv = {
+  #       enable = true;
+  #       # enableBashIntegration = true;
+  #       enableZshIntegration = true;
+  #       nix-direnv.enable = true;
+  #     };
 
-      ssh = {
-        enable = true;
-        # https://developer.1password.com/docs/ssh/
-        extraConfig = 
-        ''
-        Host *
-               IdentityAgent ~/.1password/agent.sock
-        '';
-      };
+  #     ssh = {
+  #       enable = true;
+  #       # https://developer.1password.com/docs/ssh/
+  #       extraConfig = 
+  #       ''
+  #       Host *
+  #              IdentityAgent ~/.1password/agent.sock
+  #       '';
+  #     };
 
-      # Developer/Productivity tools
-      git = {
-        enable = true;
-        userName  = "bsaul";
-        userEmail = "bradleysaul@fastmail.com";
-        extraConfig = {
-          init = {
-            defaultBranch = "main";
-          };
-          push = {
-            autoSetupRemote = true;
-          };
-        };
-        ignores = [
-          ".DS_Store"
-          ".direnv*"
-          ".vscode/**"
-        ];
-      };
-      vscode = {
-        enable = true;
-      };
-    };
+  #     # Developer/Productivity tools
 
-    # got most of these ideas from:
-    # https://shen.hong.io/nixos-for-philosophy-installing-firefox-latex-vscodium/
-    programs.firefox = {
-      enable = true;
-      profiles.default = {
-          id = 0;
-          name = "Default";
-          settings = {
-              "browser.startup.homepage" = "https://functionalstatistics.com";
-              # Disable Pocket Integration
-              "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
-              "extensions.pocket.enabled" = false;
-              "extensions.pocket.api" = "";
-              "extensions.pocket.oAuthConsumerKey" = "";
-              "extensions.pocket.showHome" = false;
-              "extensions.pocket.site" = "";
-          };
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-            # additional at http://nur.nix-community.org/repos/rycee/
-            ublock-origin
-            darkreader
-            onepassword-password-manager
-            markdownload
-          ];
-      };
-    };
-    services = {
-      espanso = {
-        enable = true;
-        matches = {
-            base = {
-              matches = [
-                {
-                  trigger = ":zn";
-                  replace = "{{timestamp}} ";
-                }
-                { 
-                  trigger = ":nn";
-                  replace = "---\ntags: []\n---\n";
-                }
-                {
-                  trigger = ":eqsetoid";
-                  replace = "begin\n ? \n≈⟨ ? ⟩\n ? ∎";
-                }
-                {
-                  trigger = ":step";
-                  replace = "\n≈⟨ ? ⟩\n ?";
-                }
-              ];
-            };
-            global_vars = {
-              global_vars = [
-                {
-                  name = "currentdate";
-                  type = "date";
-                  params = {format = "%d/%m/%Y";};
-                }
-                {
-                  name = "currenttime";
-                  type = "date";
-                  params = {format = "%R";};
-                }
-                { 
-                  name = "timestamp";
-                  type = "date";
-                  params = {format = "%Y%m%d%H%M%S";};
-                }
-              ];
-            };
-          };
-        };
-      };
-  };
+  #     git = {
+  #       package = pkgs.gitFull;
+  #       enable = true;
+  #       userName  = "Bradley Saul";
+  #       userEmail = "bradleysaul@fastmail.com";
+  #       extraConfig = {
+  #         init = {
+  #           defaultBranch = "main";
+  #         };
+  #         push = {
+  #           autoSetupRemote = true;
+  #         };
+  #         # See directions here: https://git-send-email.io/#step-1  
+  #         sendemail = {
+  #           smtpserver = "smtp.fastmail.com";
+  #           smtpuser = "bradleysaul@fastmail.com";
+  #           smtpencryption = "ssl";
+  #           smtpserverport = 465;
+  #           # smtppass = config.sops.secrets.fastmail_smtp_key.path;
+  #         };
+  #       };
+  #       ignores = [
+  #         ".DS_Store"
+  #         ".direnv*"
+  #         ".vscode/**"
+  #       ];
+  #     };
+  #     vscode = {
+  #       enable = true;
+  #     };
+  #   };
+
+  #   # got most of these ideas from:
+  #   # https://shen.hong.io/nixos-for-philosophy-installing-firefox-latex-vscodium/
+  #   programs.firefox = {
+  #     enable = true;
+  #     profiles.default = {
+  #         id = 0;
+  #         name = "Default";
+  #         settings = {
+  #             "browser.startup.homepage" = "https://functionalstatistics.com";
+  #             # Disable Pocket Integration
+  #             "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
+  #             "extensions.pocket.enabled" = false;
+  #             "extensions.pocket.api" = "";
+  #             "extensions.pocket.oAuthConsumerKey" = "";
+  #             "extensions.pocket.showHome" = false;
+  #             "extensions.pocket.site" = "";
+  #         };
+  #       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+  #           # additional at http://nur.nix-community.org/repos/rycee/
+  #           ublock-origin
+  #           darkreader
+  #           onepassword-password-manager
+  #           markdownload
+  #         ];
+  #     };
+  #   };
+  #   services = {
+  #     espanso = {
+  #       enable = true;
+  #       matches = {
+  #           base = {
+  #             matches = [
+  #               {
+  #                 trigger = ":zn";
+  #                 replace = "{{timestamp}} ";
+  #               }
+  #               { 
+  #                 trigger = ":nn";
+  #                 replace = "---\ntags: []\n---\n";
+  #               }
+  #               {
+  #                 trigger = ":eqsetoid";
+  #                 replace = "begin\n ? \n≈⟨ ? ⟩\n ? ∎";
+  #               }
+  #               {
+  #                 trigger = ":step";
+  #                 replace = "\n≈⟨ ? ⟩\n ?";
+  #               }
+  #             ];
+  #           };
+  #           global_vars = {
+  #             global_vars = [
+  #               {
+  #                 name = "currentdate";
+  #                 type = "date";
+  #                 params = {format = "%d/%m/%Y";};
+  #               }
+  #               {
+  #                 name = "currenttime";
+  #                 type = "date";
+  #                 params = {format = "%R";};
+  #               }
+  #               { 
+  #                 name = "timestamp";
+  #                 type = "date";
+  #                 params = {format = "%Y%m%d%H%M%S";};
+  #               }
+  #             ];
+  #           };
+  #         };
+  #       };
+  #     };
+  # };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [ 
-     _1password
+     _1password-cli
      _1password-gui
     #  coreutils-full
     # (python3.withPackages(ps: with ps; [ dbus-python ]))
