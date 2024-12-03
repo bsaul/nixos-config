@@ -56,6 +56,20 @@ in
   # Allow unfree/proprietary software
   nixpkgs.config.allowUnfree = true;
 
+
+  # sops = {
+  #   # age.keyFile = "/home/<your username>/.config/sops/age/keys.txt"; # must have no password!
+
+  #   defaultSopsFile = ./secrets.yaml;
+  #   defaultSymlinkPath = "/run/user/1000/secrets";
+  #   defaultSecretsMountPoint = "/run/user/1000/secrets.d";
+
+  #   # secrets.fastmail_smtp_key_key = {
+  #   #   # sopsFile = ./secrets.yml.enc; # optionally define per-secret files
+  #   #   path = "${config.sops.defaultSymlinkPath}/fastmail_smtp_key";
+  #   # };
+  # };
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

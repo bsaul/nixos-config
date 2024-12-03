@@ -145,13 +145,13 @@
               "extensions.pocket.showHome" = false;
               "extensions.pocket.site" = "";
           };
-        # extensions = with config.nur.repos.rycee.firefox-addons; [
-        #     # additional at http://nur.nix-community.org/repos/rycee/
-        #     ublock-origin
-        #     darkreader
-        #     onepassword-password-manager
-        #     markdownload
-        #   ];
+        extensions = with config.nur.repos.rycee.firefox-addons; [
+            # additional at http://nur.nix-community.org/repos/rycee/
+            ublock-origin
+            darkreader
+            onepassword-password-manager
+            markdownload
+          ];
       };
     };
     services = {

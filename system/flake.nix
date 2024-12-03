@@ -8,7 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager?release-24.11";
+      url = "github:nix-community/home-manager?ref=release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";
@@ -19,7 +19,7 @@
   
   {
     # Please replace my-nixos with your hostname
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.bsaul = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         # Import the previous configuration.nix we used,
@@ -35,8 +35,9 @@
            home-manager.useGlobalPkgs = true;
            home-manager.sharedModules = [
               sops-nix.homeManagerModules.sops
+               nur.nixosModules.nur
             ];
-           home-manager.users.bsaul.imports = [ ./home.nix ] ;
+           home-manager.users.bsaul.imports = [ sops-nix.homeManagerModules.sops ./home.nix ] ;
 
           }
       ];
