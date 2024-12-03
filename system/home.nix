@@ -1,5 +1,19 @@
  { config, pkgs, ... }:
  {
+
+    sops = {
+      age.keyFile = "/home/bsaul/.config/sops/age/keys.txt"; # must have no password!
+
+      defaultSopsFile = ./secrets.yaml;
+      defaultSymlinkPath = "/run/user/1000/secrets";
+      defaultSecretsMountPoint = "/run/user/1000/secrets.d";
+
+      secrets.fastmail_smtp = {
+        # sopsFile = ./secrets.yml.enc; # optionally define per-secret files
+        path = "${config.sops.defaultSymlinkPath}/fastmail_smtp";
+      };
+    };
+
     home.stateVersion = "22.05";
     home.shellAliases = {
       ".." = "cd ..";
@@ -114,7 +128,7 @@
             smtpuser = "bradleysaul@fastmail.com";
             smtpencryption = "ssl";
             smtpserverport = 465;
-            # smtppass = config.sops.secrets.fastmail_smtp_key.path;
+            smtppass = config.sops.secrets.fastmail_smtp.path;
           };
         };
         ignores = [
