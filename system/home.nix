@@ -82,11 +82,11 @@
 
       # application launcher
       rofi.enable = true;
-      
-      # terminal emulator
-      kitty.enable = true;
 
       # Shells/Shell tools
+      tmux = {
+        enable = true;
+      };
       bat.enable = true;
       bash.enable = true;
       eza.enable = true;
@@ -122,13 +122,16 @@
           push = {
             autoSetupRemote = true;
           };
+          credential = {
+            helper = "store";
+          };
           # See directions here: https://git-send-email.io/#step-1  
           sendemail = {
             smtpserver = "smtp.fastmail.com";
             smtpuser = "bradleysaul@fastmail.com";
             smtpencryption = "ssl";
             smtpserverport = 465;
-            smtppass = config.sops.secrets.fastmail_smtp.path;
+            # config.sops.secrets.fastmail_smtp.path;
           };
         };
         ignores = [
