@@ -47,8 +47,10 @@
       dropbox-cli
       libreoffice-qt
       slack
-      maestral
-      maestral-gui
+      # maestral
+      # maestral-gui
+      planify
+      obsidian
 
       # developer tools
       vim

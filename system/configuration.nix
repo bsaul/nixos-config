@@ -104,13 +104,22 @@
   # sound.enable = true;
   # hardware.pulseaudio.enable = true;
 
+  security.rtkit.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+    jack.enable = true;  # provides the JACK server shim
+  };
+
   # Add docker
   virtualisation.docker.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bsaul = {
      isNormalUser = true;
-     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
+     extraGroups = [ "wheel" "docker" "audio" ]; # Enable ‘sudo’ for the user.
      shell = pkgs.zsh;
   };
 
