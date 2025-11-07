@@ -140,16 +140,16 @@
           ".DS_Store"
           ".direnv*"
           ".vscode/**"
+          "/scratch/"
         ];
       };
       vscode = {
         enable = true;
       };
-    };
 
     # got most of these ideas from:
     # https://shen.hong.io/nixos-for-philosophy-installing-firefox-latex-vscodium/
-    programs.firefox = {
+    firefox = {
       enable = true;
       profiles.default = {
           id = 0;
@@ -172,7 +172,12 @@
             markdownload
           ];
       };
+     };
+
+     chromium = {enable = true;};
+
     };
+
     services = {
       espanso = {
         enable = true;
