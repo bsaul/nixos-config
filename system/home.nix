@@ -30,7 +30,7 @@
     home.packages = with pkgs; [
 
       # research, writing
-      libsForQt5.okular
+      kdePackages.okular
       libsForQt5.poppler
       pandoc
 
@@ -58,6 +58,7 @@
       nixpkgs-fmt
       ripgrep
       colordiff
+      antigravity
       
       # fonts
       julia-mono
@@ -115,8 +116,10 @@
       git = {
         package = pkgs.gitFull;
         enable = true;
+        # settings = {
         userName  = "Bradley Saul";
         userEmail = "bradleysaul@fastmail.com";
+        # };
         extraConfig = {
           init = {
             defaultBranch = "main";
@@ -164,7 +167,7 @@
               "extensions.pocket.showHome" = false;
               "extensions.pocket.site" = "";
           };
-        extensions = with config.nur.repos.rycee.firefox-addons; [
+        extensions.packages = with config.nur.repos.rycee.firefox-addons; [
             # additional at http://nur.nix-community.org/repos/rycee/
             ublock-origin
             darkreader
