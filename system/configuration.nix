@@ -56,12 +56,9 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
     desktopManager.xterm.enable = false;
     # startDbusSession = true;
-    # displayManager = {  
+    # displayManager = {
     #   defaultSession = "none+xmonad";
     # };
 
@@ -79,6 +76,9 @@
     #   config = ./xmonad.hs;
     # };
   };
+
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
   
 
 
