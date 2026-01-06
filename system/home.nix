@@ -47,8 +47,7 @@
       dropbox-cli
       libreoffice-qt
       slack
-      # maestral
-      # maestral-gui
+
       planify
       obsidian
 
@@ -96,7 +95,7 @@
       zsh.enable = true;
       direnv = {
         enable = true;
-        # enableBashIntegration = true;
+
         enableZshIntegration = true;
         nix-direnv.enable = true;
       };
@@ -136,7 +135,7 @@
             smtpuser = "bradleysaul@fastmail.com";
             smtpencryption = "ssl";
             smtpserverport = 465;
-            # config.sops.secrets.fastmail_smtp.path;
+
           };
         };
         ignores = [
