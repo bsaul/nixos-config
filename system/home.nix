@@ -102,6 +102,7 @@
 
       ssh = {
         enable = true;
+        enableDefaultConfig = false;
         # https://developer.1password.com/docs/ssh/
         matchBlocks = {
           "*" = {
