@@ -36,9 +36,9 @@
            home-manager.useGlobalPkgs = true;
            home-manager.sharedModules = [
               sops-nix.homeManagerModules.sops
-               nur.nixosModules.nur
+              nur.hmModules.nur
             ];
-           home-manager.users.bsaul.imports = [ sops-nix.homeManagerModules.sops ./home.nix ] ;
+           home-manager.users.bsaul.imports = [ ./home.nix ] ;
 
           }
       ];
