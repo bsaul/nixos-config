@@ -115,11 +115,11 @@
       git = {
         package = pkgs.gitFull;
         enable = true;
-        # settings = {
-        userName  = "Bradley Saul";
-        userEmail = "bradleysaul@fastmail.com";
-        # };
-        extraConfig = {
+        settings = {
+          user = {
+            name  = "Bradley Saul";
+            email = "bradleysaul@fastmail.com";
+          };
           init = {
             defaultBranch = "main";
           };
@@ -135,7 +135,6 @@
             smtpuser = "bradleysaul@fastmail.com";
             smtpencryption = "ssl";
             smtpserverport = 465;
-
           };
         };
         ignores = [
