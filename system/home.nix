@@ -50,6 +50,7 @@
 
       planify
       obsidian
+      tuba
 
       # developer tools
       vim
