@@ -186,6 +186,15 @@
     services = {
       espanso = {
         enable = true;
+        package = pkgs.espanso-wayland;
+        configs = {
+          default = {
+            search_shortcut = "CTRL+SHIFT+SPACE";
+            keyboard_layout = {
+              layout = "us";
+            };
+          };
+        };
         matches = {
             base = {
               matches = [

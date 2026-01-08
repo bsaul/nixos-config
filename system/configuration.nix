@@ -31,6 +31,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelModules = [ "uinput" ];
 
   networking.hostName = "bsaul"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -48,6 +49,10 @@
  
   # Enable fingerprint support
   services.fprintd.enable = true;
+
+  services.udev.extraRules = ''
+    KERNEL=="uinput", GROUP="input", MODE="0660"
+  '';
 
 
   # Enable touchpad support.
@@ -99,7 +104,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bsaul = {
      isNormalUser = true;
-     extraGroups = [ "wheel" "docker" "audio" ]; # Enable ‘sudo’ for the user.
+     extraGroups = [ "wheel" "docker" "audio" "input" ]; # Enable ‘sudo’ for the user.
      shell = pkgs.zsh;
   };
 
