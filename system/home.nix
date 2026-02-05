@@ -25,6 +25,10 @@
       "cat" = "bat";
     };
 
+    home.sessionPath = [
+      "$HOME/.gemini/bin"
+    ];
+
     home.sessionVariables = {
       BROWSER = "firefox";
       TERMINAL = "kitty";
@@ -62,6 +66,7 @@
       ripgrep
       colordiff
       antigravity
+      claude-code
       
       # fonts
       julia-mono
@@ -149,6 +154,7 @@
           ".direnv*"
           ".vscode/**"
           "/scratch/"
+          "*.code-workspace"
         ];
       };
       vscode = {
