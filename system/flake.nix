@@ -14,8 +14,7 @@
     nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, sops-nix, home-manager, nur, ... }@inputs: 
-
+  outputs = { self, nixpkgs, sops-nix, home-manager, nur, ... }@inputs:
   
   {
 
