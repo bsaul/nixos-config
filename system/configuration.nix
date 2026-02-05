@@ -66,28 +66,10 @@
     # displayManager = {
     #   defaultSession = "none+xmonad";
     # };
-
-    # Enable xmonad.
-    # firefox/vscode are REALLY laggy using xmonad
-    # and I can't figure out why
-    # windowManager.xmonad = {
-    #   enable = true;
-    #   enableContribAndExtras = true;
-    #   extraPackages = haskellPackages: [
-    #     haskellPackages.xmonad-contrib
-    #     haskellPackages.xmobar
-    #     # haskellPackages.dbus
-    #   ];
-    #   config = ./xmonad.hs;
-    # };
   };
 
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
-  
-
-
-
 
   security.rtkit.enable = true;
 
@@ -116,9 +98,6 @@
   ];
   environment.sessionVariables.TERMINAL = ["kitty"];
 
-
-
-
   programs = {
     zsh.enable = true;
     _1password = {
@@ -131,11 +110,7 @@
   };
 
   # List services that you want to enable:
-
   services.gnome.gnome-keyring.enable = true;
-
-
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
