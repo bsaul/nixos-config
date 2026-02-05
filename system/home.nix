@@ -34,6 +34,13 @@
       TERMINAL = "kitty";
     };
 
+    home.file = {
+      ".claude/skills/nixos-rebuild/SKILL.md".source = ./claude-skills/nixos-rebuild.md;
+      ".claude/skills/nixos-check/SKILL.md".source = ./claude-skills/nixos-check.md;
+      ".claude/skills/update-flake/SKILL.md".source = ./claude-skills/update-flake.md;
+      ".claude/skills/add-todoist-task/SKILL.md".source = ./claude-skills/add-todoist-task.md;
+    };
+
     home.packages = with pkgs; [
 
       # research, writing
