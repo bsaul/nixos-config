@@ -1,9 +1,9 @@
 ---
 name: agda-developer
-description:
-Use this agent for Agda development tasks including implementing functions,
-filling holes, proving theorems, and exploring Agda codebases.
-Invoke when the user is working on Agda code beyond simple typechecking.
+description: |
+  Use this agent for Agda development tasks including implementing functions,
+  filling holes, proving theorems, and exploring Agda codebases.
+  Use proactively when the user is working on Agda code beyond simple typechecking.
 model: inherit
 mcpServers:
   - agda-mcp

@@ -2,8 +2,8 @@
 name: project-manager
 description: |
   Plan and track progress on code projects.
-  Use this agent to create project plans, break down work into tasks,
-  and document progress toward completion.
+  Use proactively when the user discusses project planning,
+  task breakdown, or tracking progress toward completion.
 model: inherit
 ---
 
