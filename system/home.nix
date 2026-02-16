@@ -39,6 +39,58 @@
       ".claude/skills/nixos-check/SKILL.md".source = ./claude-skills/nixos-check.md;
       ".claude/skills/update-flake/SKILL.md".source = ./claude-skills/update-flake.md;
       ".claude/skills/add-todoist-task/SKILL.md".source = ./claude-skills/add-todoist-task.md;
+      ".claude/settings.json" = {
+        force = true;
+        text = builtins.toJSON {
+        preferences = {
+          theme = "dark";
+        };
+        alwaysThinkingEnabled = true;
+        statusLine = {
+          type = "command";
+          command = "~/.claude/statusline.sh";
+        };
+      };
+      };
+      ".claude/statusline.sh" = {
+        executable = true;
+        text = ''
+          #!/usr/bin/env bash
+          data=$(cat)
+
+          # Extract fields
+          model=$(echo "$data" | jq -r '.model.display_name // "unknown"')
+          thinking=$(echo "$data" | jq -r '.thinking // empty')
+          context_pct=$(echo "$data" | jq -r '.context_percent // empty')
+          transcript=$(echo "$data" | jq -r '.transcript_path // empty')
+          agent=$(echo "$data" | jq -r '.agent_name // empty')
+
+          # Colors
+          reset="\033[0m"
+          bold="\033[1m"
+          dim="\033[2m"
+          cyan="\033[36m"
+          yellow="\033[33m"
+          green="\033[32m"
+          magenta="\033[35m"
+
+          # Line 1: model, thinking, context
+          line1="''${bold}''${cyan}$model''${reset}"
+          [ -n "$thinking" ] && line1+=" ''${dim}thinking:''${reset} ''${green}$thinking''${reset}"
+          [ -n "$context_pct" ] && line1+=" ''${dim}ctx:''${reset} ''${yellow}''${context_pct}%''${reset}"
+
+          # Line 2: agent and transcript
+          line2=""
+          [ -n "$agent" ] && line2+="''${magenta}$agent''${reset}"
+          if [ -n "$transcript" ]; then
+            [ -n "$line2" ] && line2+=" "
+            line2+="''${dim}$transcript''${reset}"
+          fi
+
+          echo -e "$line1"
+          [ -n "$line2" ] && echo -e "$line2"
+        '';
+      };
     };
 
     home.packages = with pkgs; [
@@ -74,6 +126,7 @@
       colordiff
       antigravity
       claude-code
+      jq
       
       # fonts
       julia-mono
