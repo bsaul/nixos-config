@@ -1,6 +1,6 @@
 ---
 name: agda-developer
-description: |
+description: >
   Use this agent for Agda development tasks including implementing functions,
   filling holes, proving theorems, and exploring Agda codebases.
   Use proactively when the user is working on Agda code beyond simple typechecking.
