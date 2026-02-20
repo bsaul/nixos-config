@@ -32,6 +32,9 @@
     home.sessionVariables = {
       BROWSER = "firefox";
       TERMINAL = "kitty";
+      COLORTERM = "truecolor";
+      LANG = "en_US.UTF-8";
+      LC_ALL = "en_US.UTF-8";
     };
 
     home.file = {
@@ -128,11 +131,67 @@
       # Shells/Shell tools
       tmux = {
         enable = true;
+        prefix = "C-a";
+        mouse = true;
+        historyLimit = 50000;
+        terminal = "xterm-256color";
+        plugins = with pkgs.tmuxPlugins; [
+          resurrect
+          {
+            plugin = continuum;
+            extraConfig = "set -g @continuum-restore 'on'";
+          }
+        ];
+        extraConfig = ''
+          # True color support
+          set-option -ga terminal-overrides ",xterm-256color:Tc"
+          setw -q -g utf8 on
+
+          # Pane splitting (keep current path)
+          bind | split-window -h -c "#{pane_current_path}"
+          bind - split-window -v -c "#{pane_current_path}"
+
+          # Vim-style pane navigation
+          bind h select-pane -L
+          bind j select-pane -D
+          bind k select-pane -U
+          bind l select-pane -R
+
+          # Clear screen
+          bind C-l send-keys 'clear' Enter
+
+          # Claude export shortcut
+          bind S send-keys 'claude export last' Enter
+
+          # Catppuccin Mocha color scheme
+          set -g status-style "bg=#1e1e2e,fg=#cdd6f4"
+          set -g status-left "#[bg=#89b4fa,fg=#1e1e2e,bold] #S #[default] "
+          set -g status-right "#[fg=#cdd6f4] #(whoami) | %Y-%m-%d %H:%M #[bg=#89b4fa,fg=#1e1e2e,bold] #H "
+          set -g status-left-length 50
+          set -g status-right-length 100
+
+          set -g window-status-current-style "bg=#89b4fa,fg=#1e1e2e,bold"
+          set -g window-status-current-format " #I:#W "
+          set -g window-status-format " #I:#W "
+
+          set -g pane-border-style "fg=#313244"
+          set -g pane-active-border-style "fg=#89b4fa"
+
+          set -g message-style "bg=#313244,fg=#cdd6f4"
+        '';
       };
       bat.enable = true;
       bash.enable = true;
       eza.enable = true;
-      zsh.enable = true;
+      zsh = {
+        enable = true;
+        initContent = ''
+          # Auto-launch tmux if not already inside a tmux session
+          if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" != "vscode" ]; then
+            tmux new-session -A -s main
+          fi
+        '';
+      };
       direnv = {
         enable = true;
 
