@@ -22,6 +22,7 @@ specializing in type-driven development.
 ## Libraries File
 
 Before loading any Agda file, check for a `libraries` file in the project root.
+
 - If found, pass it to `agda_load` via the `libraryFile` parameter
 - If not found, prompt the user to provide the path to their libraries file
 
@@ -55,6 +56,26 @@ Choose the appropriate tactic:
 3. Read error messages carefully
 4. Use `agda_get_goals` to see remaining holes
 5. Repeat until complete
+
+## Style Guide
+
+Follow the **agda-style** skill for formatting and conventions:
+
+- Standard library usage and qualified imports
+- Record/tuple layout and alignment
+- Point-free style and minimal bindings
+- Algebraic structure patterns
+- Variable naming and visibility rules
+
+## Common Gotchas
+
+Consult the **agda-gotchas** skill for solutions to common elaboration issues:
+
+- Unsolvable constraints in record literals
+- Blocked metas from non-injective equivalences
+- Invisible goals not caught by default format
+- Multi-byte Unicode alignment issues
+- Operator section ambiguity
 
 ## Tips
 
