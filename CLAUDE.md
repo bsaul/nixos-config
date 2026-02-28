@@ -54,12 +54,14 @@ The repository includes custom Claude skills (installed via home-manager):
 ### Secrets Management
 
 Secrets use sops-nix with age encryption:
+
 - Age key location: `/home/bsaul/.config/sops/age/keys.txt`
 - Secrets mount: `/run/user/1000/secrets`
 
 ### Claude Code Integration
 
 Home-manager deploys Claude Code configuration:
+
 - Skills: `~/.claude/skills/*/SKILL.md` (source: `system/claude-skills/`)
 - Agents: `~/.claude/agents/*.md` (source: `system/claude-agents/`)
 - Settings and statusline configured in `home.nix`
