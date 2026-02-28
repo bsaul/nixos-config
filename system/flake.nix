@@ -28,14 +28,14 @@
 
         sops-nix.nixosModules.sops
 
-        nur.nixosModules.nur
+        # NUR overlay - access packages via pkgs.nur.repos.<username>.<package>
+        { nixpkgs.overlays = [ nur.overlays.default ]; }
 
         home-manager.nixosModules.home-manager
          {
            home-manager.useGlobalPkgs = true;
            home-manager.sharedModules = [
               sops-nix.homeManagerModules.sops
-              nur.hmModules.nur
             ];
            home-manager.users.bsaul.imports = [ ./home.nix ] ;
 

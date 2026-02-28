@@ -268,7 +268,7 @@
               "extensions.pocket.showHome" = false;
               "extensions.pocket.site" = "";
           };
-        extensions.packages = with config.nur.repos.rycee.firefox-addons; [
+        extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
             # additional at http://nur.nix-community.org/repos/rycee/
             ublock-origin
             darkreader
