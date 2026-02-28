@@ -2,7 +2,7 @@
 name: ventilated-prose
 description: Write markdown using ventilated prose (semantic line breaks)
 disable-model-invocation: true
-user-invocable: false
+user-invocable: true
 ---
 
 # Ventilated Prose
