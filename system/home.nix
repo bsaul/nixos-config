@@ -2,7 +2,7 @@
  {
   imports = [
     ./espanso.nix
-    ../claude
+    ./claude
   ];
 
     sops = {

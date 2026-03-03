@@ -12,7 +12,8 @@
       "Bash(direnv status:*)",
       "Bash(agda:*)",
       "Bash(tree:*)",
-      "Bash(nix flake check:*)"
+      "Bash(nix flake check:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

@@ -50,7 +50,7 @@ The repository includes custom Claude skills (installed via home-manager):
 | `system/hardware-configuration.nix` | Auto-generated hardware config |
 | `system/espanso.nix` | Text expansion configuration |
 | `system/secrets.yaml` | Encrypted secrets (sops) |
-| `claude/default.nix` | Claude Code configuration (skills, agents, settings) |
+| `system/claude/default.nix` | Claude Code configuration (rules, skills, agents, settings) |
 
 ### Secrets Management
 
@@ -61,11 +61,12 @@ Secrets use sops-nix with age encryption:
 
 ### Claude Code Integration
 
-Home-manager deploys Claude Code configuration via `claude/default.nix`:
+Home-manager deploys Claude Code configuration via `system/claude/default.nix`:
 
-- Skills: `~/.claude/skills/*/SKILL.md` (source: `claude/skills/`)
-- Agents: `~/.claude/agents/*.md` (source: `claude/agents/`)
-- Settings and statusline configured in `claude/default.nix`
+- Rules: `~/.claude/rules/*.md` (source: `system/claude/rules/`)
+- Skills: `~/.claude/skills/*/SKILL.md` (source: `system/claude/skills/`)
+- Agents: `~/.claude/agents/*.md` (source: `system/claude/agents/`)
+- Settings and statusline configured in `system/claude/default.nix`
 
 ## Writing Style
 
