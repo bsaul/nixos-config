@@ -45,6 +45,7 @@
       ".claude/agents/agda-developer.md".source = ./claude-agents/agda-developer.md;
       ".claude/agents/project-manager.md".source = ./claude-agents/project-manager.md;
       ".claude/agents/agda-project-setup.md".source = ./claude-agents/agda-project-setup.md;
+      ".claude/agents/agda-typecheck.md".source = ./claude-agents/agda-typecheck.md;
       ".claude/skills/ventilated-prose/SKILL.md".source = ./claude-skills/ventilated-prose.md;
       ".claude/settings.json" = {
         force = true;
