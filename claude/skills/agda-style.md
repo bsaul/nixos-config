@@ -1,11 +1,15 @@
 ---
 name: agda-style
-description: Style guide and formatting conventions for Agda development
+description: Detailed style guide and formatting conventions for Agda development
 disable-model-invocation: true
-user-invocable: false
+user-invocable: true
 ---
 
-# Agda Style & Preferences
+# Agda Style & Preferences — Detailed Reference
+
+This is the comprehensive style guide for Agda development.
+The core rules are automatically applied when working with Agda files;
+use this skill to reference detailed examples and conventions.
 
 ### Standard Library
 
@@ -108,7 +112,7 @@ x R.≈ y    -- not R._≈_ x y
 ```
 For partially-applied operators,
 use sections rather than lambdas
-(see agda-gotchas.md for the forced exception
+(see agda-gotchas skill for the forced exception
 when a section is ambiguous due to overloading):
 ```agda
 x ∙_   _∙ y   -- not λ y → x ∙ y   λ x → x ∙ y
@@ -134,7 +138,7 @@ Useful combinators:
 `_∘₂_` (compose unary `f` with binary `g`: `(f ∘₂ g) x y = f (g x y)`).
 
 Eta-expand only as much as elaboration requires
-(see Minimal Bindings below and agda-gotchas.md
+(see Minimal Bindings below and agda-gotchas skill
 for the cases where explicit implicits are forced).
 
 When point-free is compact but non-obvious,
@@ -278,7 +282,7 @@ isEquivalence = record
   }
 ```
 When `_≈_` unfolds to a record constructor (e.g. `_∣_`),
-bare names in record fields create unsolvable metas (see agda-gotchas.md).
+bare names in record fields create unsolvable metas (see agda-gotchas skill).
 Use explicit-implicit lambdas to pin the implicit before constraint solving:
 ```agda
 isEquivalence = record
@@ -297,7 +301,7 @@ isEquivalence = record
   to avoid a non-linear unification constraint:
   `reflexive {a} refl = ≈-refl {a}`
 - All of these are public (standard functionality)
-- Do not use copatterns for this pattern (see agda-gotchas.md)
+- Do not use copatterns for this pattern (see agda-gotchas skill)
 
 ### Minimal Bindings
 
@@ -312,7 +316,7 @@ This covers:
 - Unnamed wildcards for unused explicit args:
   `λ x y → e` → `λ _ _ → e` when neither appears
 
-See agda-gotchas.md for cases where elaboration forces explicit implicits
+See agda-gotchas skill for cases where elaboration forces explicit implicits
 (non-injective `_≈_`, refl-based goals with subtraction, etc.).
 
 ### Variables

@@ -1,45 +1,67 @@
 ---
 name: ventilated-prose
-description: Write markdown using ventilated prose (semantic line breaks)
+description: Reformat markdown to use ventilated prose (semantic line breaks)
 disable-model-invocation: true
 user-invocable: true
 ---
 
-# Ventilated Prose
+# Reformat to Ventilated Prose
 
-Also known as Semantic Line Breaks or Semantic Ventilated Prose.
-A technique for writing markdown text
-to improve diff readability and editing.
+Apply ventilated prose formatting to existing markdown text.
 
-## Rules
+## Process
 
-- Break long sentences into multiple lines at natural pauses
-  (e.g., after commas, before conjunctions like "and," "but," "since").
-- **Goal**: One distinct idea or phrase per line.
-  This ensures clearer diffs and easier editing.
-- Blank lines separate paragraphs and sections.
-- Lists follow standard markdown (each item on its own line).
-- Code blocks and other block elements are unchanged.
+1. Read the markdown file or text provided by the user
+2. Identify long sentences with multiple ideas
+3. Break lines at natural pauses:
+   - After commas
+   - Before conjunctions (and, but, since, because, while, etc.)
+   - After introductory phrases
+   - At logical breaks in compound sentences
+4. Keep one distinct idea or phrase per line
+5. Preserve:
+   - Paragraph breaks (blank lines)
+   - List formatting
+   - Code blocks
+   - Other block elements
 
-## Example
+## Rules Reference
 
-**Wrong:**
+**Goal**: One distinct idea or phrase per line.
+This ensures clearer diffs and easier editing.
 
+**Where to break**:
+- After commas separating clauses
+- Before coordinating conjunctions (and, but, or, nor, for, so, yet)
+- Before subordinating conjunctions (because, since, while, although, if, when)
+- After introductory phrases
+- At natural pauses where you'd breathe when reading aloud
+
+**What NOT to break**:
+- Short sentences (< 80 chars) with single ideas
+- List items (each item is already one line)
+- Code blocks
+- Headings
+- Links or inline code spans (keep them intact when possible)
+
+## Example Transformation
+
+**Before:**
 ```markdown
-This is a long sentence that contains multiple ideas, and it also has some additional context that could be separated, but instead it's all on one line.
+This is a long sentence that contains multiple ideas, and it also has some additional context that could be separated, but instead it's all on one line which makes git diffs harder to read.
 ```
 
-**Correct:**
-
+**After:**
 ```markdown
 This is a long sentence that contains multiple ideas,
 and it also has some additional context that could be separated,
-so we break it at natural pauses.
+but instead it's all on one line
+which makes git diffs harder to read.
 ```
 
-## Benefits
+## Tips
 
-- Git diffs show exactly which phrase changed
-- Easy to reorder ideas within a sentence
-- Clearer structure at a glance
-- Line-based tools work better (grep, wc -l, etc.)
+- Break after commas when they separate independent clauses
+- Don't break within short phrases (e.g., "such as X" stays together)
+- Aim for balanced line lengths when possible (but clarity > length)
+- Re-read the result to ensure it flows naturally

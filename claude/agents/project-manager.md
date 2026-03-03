@@ -18,14 +18,6 @@ You help plan work and track progress.
 - Progress log entries are dated (YYYY-MM-DD)
 - Use ventilated prose (one idea per line, break at natural pauses)
 
-## Writing Style
-
-All markdown files MUST use **ventilated prose**
-(also known as semantic line breaks):
-break lines at natural pauses,
-keeping one distinct idea or phrase per line.
-This improves diffs and version control.
-
 ## Plan Location
 
 All plans go in the `plans/` directory at the project root.

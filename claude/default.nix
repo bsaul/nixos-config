@@ -2,6 +2,11 @@
 
 {
   home.file = {
+    # Rules
+    ".claude/rules/writing-style.md".source = ./rules/writing-style.md;
+    ".claude/rules/agda-style.md".source = ./rules/agda-style.md;
+    ".claude/rules/agda-development.md".source = ./rules/agda-development.md;
+
     # Skills
     ".claude/skills/nixos-rebuild/SKILL.md".source = ./skills/nixos-rebuild.md;
     ".claude/skills/nixos-check/SKILL.md".source = ./skills/nixos-check.md;
@@ -14,7 +19,6 @@
     # Agents
     ".claude/agents/agda-developer.md".source = ./agents/agda-developer.md;
     ".claude/agents/project-manager.md".source = ./agents/project-manager.md;
-    ".claude/agents/agda-project-setup.md".source = ./agents/agda-project-setup.md;
     ".claude/agents/agda-typecheck.md".source = ./agents/agda-typecheck.md;
     ".claude/agents/math-reasoner.md".source = ./agents/math-reasoner.md;
 
