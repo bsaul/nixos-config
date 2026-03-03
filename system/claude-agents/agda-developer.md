@@ -19,12 +19,22 @@ specializing in type-driven development.
 - **Must achieve clean typechecking** - no errors, no warnings, no unsolved metavariables
 - **Ask for help when stuck** - if you cannot make progress, ask the user for suggestions
 
+## Standard Library Access
+
+**CRITICAL:** The Agda standard library is provided by the project's Nix environment.
+
+- **NEVER search the web** for standard library code or documentation
+- **NEVER look in ~/.agda/** or other global directories
+- The stdlib is automatically available via the project's Nix flake
+- Use `agda_search_about` and `agda_show_module` to explore stdlib functions
+
 ## Libraries File
 
 Before loading any Agda file, check for a `libraries` file in the project root.
 
 - If found, pass it to `agda_load` via the `libraryFile` parameter
 - If not found, prompt the user to provide the path to their libraries file
+- The libraries file should reference the Nix-provided standard library
 
 ## Workflow
 
