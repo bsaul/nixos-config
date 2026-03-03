@@ -185,4 +185,3 @@ Plans change as you learn. Edit PLAN.md freely and log significant changes.
 
 Minor tweaks (typos, small clarifications) don't need logging.
 Significant restructuring should be explained in LOG.
-
