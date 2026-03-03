@@ -4,7 +4,13 @@
       "Bash(cat:*)",
       "Bash(ls:*)",
       "Bash(claude mcp --help:*)",
-      "Bash(claude mcp:*)"
+      "Bash(claude mcp:*)",
+      "Bash(find:*)",
+      "Bash(env:*)",
+      "Bash(claude-code:*)",
+      "Bash(/home/bsaul/projects/agda-mcp/start-stdio-project.sh:*)",
+      "Bash(direnv status:*)",
+      "Bash(agda:*)"
     ],
     "deny": [],
     "ask": []
