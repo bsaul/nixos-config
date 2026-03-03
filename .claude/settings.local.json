@@ -10,7 +10,9 @@
       "Bash(claude-code:*)",
       "Bash(/home/bsaul/projects/agda-mcp/start-stdio-project.sh:*)",
       "Bash(direnv status:*)",
-      "Bash(agda:*)"
+      "Bash(agda:*)",
+      "Bash(tree:*)",
+      "Bash(nix flake check:*)"
     ],
     "deny": [],
     "ask": []

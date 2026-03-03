@@ -2,6 +2,7 @@
  {
   imports = [
     ./espanso.nix
+    ../claude
   ];
 
     sops = {
@@ -35,38 +36,6 @@
       COLORTERM = "truecolor";
       LANG = "en_US.UTF-8";
       LC_ALL = "en_US.UTF-8";
-    };
-
-    home.file = {
-      ".claude/skills/nixos-rebuild/SKILL.md".source = ./claude-skills/nixos-rebuild.md;
-      ".claude/skills/nixos-check/SKILL.md".source = ./claude-skills/nixos-check.md;
-      ".claude/skills/update-flake/SKILL.md".source = ./claude-skills/update-flake.md;
-      ".claude/skills/add-todoist-task/SKILL.md".source = ./claude-skills/add-todoist-task.md;
-      ".claude/agents/agda-developer.md".source = ./claude-agents/agda-developer.md;
-      ".claude/agents/project-manager.md".source = ./claude-agents/project-manager.md;
-      ".claude/agents/agda-project-setup.md".source = ./claude-agents/agda-project-setup.md;
-      ".claude/agents/agda-typecheck.md".source = ./claude-agents/agda-typecheck.md;
-      ".claude/skills/ventilated-prose/SKILL.md".source = ./claude-skills/ventilated-prose.md;
-      ".claude/settings.json" = {
-        force = true;
-        text = builtins.toJSON {
-        preferences = {
-          theme = "dark";
-        };
-        alwaysThinkingEnabled = true;
-        statusLine = {
-          type = "command";
-          command = "~/.claude/statusline.sh";
-        };
-      };
-      };
-      ".claude/statusline.sh" = {
-        executable = true;
-        text = ''
-          #!/usr/bin/env bash
-          jq -r '.model.display_name // "unknown"'
-        '';
-      };
     };
 
     home.packages = with pkgs; [
