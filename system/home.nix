@@ -44,6 +44,7 @@
       ".claude/skills/add-todoist-task/SKILL.md".source = ./claude-skills/add-todoist-task.md;
       ".claude/agents/agda-developer.md".source = ./claude-agents/agda-developer.md;
       ".claude/agents/project-manager.md".source = ./claude-agents/project-manager.md;
+      ".claude/agents/agda-project-setup.md".source = ./claude-agents/agda-project-setup.md;
       ".claude/skills/ventilated-prose/SKILL.md".source = ./claude-skills/ventilated-prose.md;
       ".claude/settings.json" = {
         force = true;

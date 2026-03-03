@@ -6,7 +6,7 @@
       ./hardware-configuration.nix
 
       # Use cachix
-      ./cachix.nix
+      # ./cachix.nix  # Commented out - file doesn't exist
     ];
 
 
