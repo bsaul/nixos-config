@@ -43,7 +43,7 @@ Choose the appropriate tactic:
 ## Development Loop
 
 1. Edit the Agda file with your implementation
-2. Reload with `agda_load` to type-check
+2. Reload with `agda_load` to type-check (or use `/agda-typecheck`)
 3. Read error messages carefully
 4. Use `agda_get_goals` to see remaining holes
 5. Repeat until complete
