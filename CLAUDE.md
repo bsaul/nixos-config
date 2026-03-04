@@ -64,7 +64,9 @@ Secrets use sops-nix with age encryption:
 Home-manager deploys Claude Code configuration via `system/claude/default.nix`:
 
 - Rules: `~/.claude/rules/*.md` (source: `system/claude/rules/`)
-- Skills: `~/.claude/skills/*/SKILL.md` (source: `system/claude/skills/`)
+- Skills: `~/.claude/skills/*.md` or `~/.claude/skills/*/SKILL.md` (source: `system/claude/skills/`)
+  - Use flat files for simple skills
+  - Use directories when auxiliary files (templates, examples) are needed
 - Agents: `~/.claude/agents/*.md` (source: `system/claude/agents/`)
 - Settings and statusline configured in `system/claude/default.nix`
 
