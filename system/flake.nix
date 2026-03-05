@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,7 +15,7 @@
     nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, sops-nix, home-manager, nur, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, sops-nix, home-manager, nur, ... }@inputs:
   
   {
 
@@ -34,6 +35,12 @@
         home-manager.nixosModules.home-manager
          {
            home-manager.useGlobalPkgs = true;
+           home-manager.extraSpecialArgs = {
+             pkgs-unstable = import nixpkgs-unstable {
+               system = "x86_64-linux";
+               config.allowUnfree = true;
+             };
+           };
            home-manager.sharedModules = [
               sops-nix.homeManagerModules.sops
             ];

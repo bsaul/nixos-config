@@ -1,4 +1,4 @@
- { config, pkgs, ... }:
+ { config, pkgs, pkgs-unstable, ... }:
  {
   imports = [
     ./espanso.nix
@@ -70,7 +70,7 @@
       ripgrep
       colordiff
       antigravity
-      claude-code
+      pkgs-unstable.claude-code
       jq
       
       # fonts
