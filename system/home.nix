@@ -192,6 +192,14 @@
           user = {
             name  = "Bradley Saul";
             email = "bradleysaul@fastmail.com";
+            signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOOzcpmBPWQ5qrPmxatXzc0WZ5BqLKv44UkQihnnYzV";
+          };
+          gpg = {
+            format = "ssh";
+            ssh.program = "/run/current-system/sw/bin/op-ssh-sign";
+          };
+          commit = {
+            gpgsign = true;
           };
           init = {
             defaultBranch = "main";
@@ -202,7 +210,7 @@
           credential = {
             helper = "store";
           };
-          # See directions here: https://git-send-email.io/#step-1  
+          # See directions here: https://git-send-email.io/#step-1
           sendemail = {
             smtpserver = "smtp.fastmail.com";
             smtpuser = "bradleysaul@fastmail.com";
