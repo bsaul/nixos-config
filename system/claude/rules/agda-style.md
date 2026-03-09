@@ -26,6 +26,13 @@ Exception: a single field can stay on one line (e.g. `record { cong = id }`).
 When a definition produces a tuple split across lines,
 align `,` with `=` so all component expressions start at the same column.
 
+### Import Consolidation
+
+If a module is already imported at the top of the file,
+add any additional names to that existing import
+rather than opening it again in a local `where` clause.
+Local `open import` is only for modules not used elsewhere in the file.
+
 ### Qualified Imports
 
 Prefer `import M as Alias` over `open import M using/renaming (...)`
@@ -61,6 +68,13 @@ and inferrable implicits at call sites.
 Define `Is*` structures bottom-up in dependency order;
 every level is a named top-level definition,
 never an inline anonymous record.
+
+### Properties Module Organization
+
+In a `Properties` module,
+group all standalone lemmas (property-level bridges) first,
+then all structure/bundle conversion functions.
+Keep the building blocks separate from the things built from them.
 
 For detailed conventions and examples,
 consult the `/agda-style` skill.
