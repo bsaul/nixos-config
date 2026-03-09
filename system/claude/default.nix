@@ -18,6 +18,7 @@
     ".claude/skills/agda-typecheck/SKILL.md".source = ./skills/agda-typecheck.md;
     ".claude/skills/review-rules/SKILL.md".source = ./skills/review-rules.md;
     ".claude/skills/new-project/SKILL.md".source = ./skills/new-project.md;
+    ".claude/skills/launch-plan/SKILL.md".source = ./skills/launch-plan.md;
 
     # Agents
     ".claude/agents/agda-developer.md".source = ./agents/agda-developer.md;
