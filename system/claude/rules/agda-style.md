@@ -26,18 +26,34 @@ Exception: a single field can stay on one line (e.g. `record { cong = id }`).
 When a definition produces a tuple split across lines,
 align `,` with `=` so all component expressions start at the same column.
 
+### Import Grouping
+
+Group imports by origin,
+separated by blank lines:
+stdlib first,
+then lycopodium (`Maps.*`),
+then carya (`Language.*`, `Compiler.*`, etc.).
+Within each group, keep alphabetical order.
+
 ### Import Consolidation
 
-If a module is already imported at the top of the file,
-add any additional names to that existing import
-rather than opening it again in a local `where` clause.
-Local `open import` is only for modules not used elsewhere in the file.
+Each module must appear at most once in the import block.
+If additional names are needed from an already-imported module,
+add them to the existing `using` clause.
+Do not repeat the import.
+
+Local `open import` inside a `where` block is only acceptable
+for modules not imported at file scope.
 
 ### Qualified Imports
 
 Prefer `import M as Alias` over `open import M using/renaming (...)`
 when you'd need a long `using` or `renaming` clause to manage name clashes.
 Plain `open import M` is fine.
+
+When a qualified import is used heavily at call sites,
+`open` it with `using` to avoid repetitive prefixing.
+Verify there are no name clashes before opening.
 
 Alias conventions:
 - Type bundles: use the type symbol (e.g., `import Data.Integer as ℤ`)
@@ -48,6 +64,11 @@ Alias conventions:
 Use `begin … ∎` chains rather than explicit `trans` calls.
 Choose the reasoning module based on the relation
 (`≡-Reasoning`, `≈-Reasoning`, `≤-Reasoning`, etc.).
+
+When a proof is a chain of two or more equivalences or equalities,
+use equational reasoning rather than naming intermediate steps in a `where` block
+and composing them with `∘` or `trans`.
+For `_⇔_` chains, use `Function.Reasoning`.
 
 ### Point-Free / Categorical Style
 
@@ -68,6 +89,31 @@ and inferrable implicits at call sites.
 Define `Is*` structures bottom-up in dependency order;
 every level is a named top-level definition,
 never an inline anonymous record.
+
+### Module Parametrisation
+
+If an anonymous `module _ (p₁ : T₁) … where` introduces parameters
+that every definition in the file depends on,
+promote it to a named top-level module parameter.
+For example, replace:
+
+```agda
+module _ {Σ : Set} (_≟_ : DecidableEquality Σ) where
+  ...  -- all definitions
+```
+
+with:
+
+```agda
+module Language.Foo {Σ : Set} (_≟_ : DecidableEquality Σ) where
+  ...
+```
+
+### Comment Style
+
+Use plain `-- comment` throughout.
+Do not use Haddock-style `-- | name: description` prefixes;
+they add no value in Agda files.
 
 ### Properties Module Organization
 

@@ -61,6 +61,14 @@ the heading is enough.
   Proof-strategy prose is warranted only when
   the proof structure is genuinely hard to read from the Agda
   (e.g., a `Tri`-based contradiction argument).
+- **Do not use headings to label code structure.**
+  "## Parametrised module" or "## Private helpers" just echoes the Agda syntax.
+  Headings should name a concept, theorem, or semantic idea,
+  not the structural form (`module`, `private`, `where`).
+- **Do not write prose for `= refl` lemmas.**
+  "Definitional: X is Y" adds nothing when the body is `refl`
+  and the type signature already states the equation.
+  The heading alone is sufficient.
 
 ### `<details>` blocks in parameterized modules
 
