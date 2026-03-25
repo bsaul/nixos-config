@@ -87,9 +87,33 @@ isPrime? : (n : ℕ) → Dec (Prime n)
 
 ### Totality Matters
 
-Every function should be total.
+In general, function should be total.
 Partiality hides proof obligations.
 If a function can fail, its type should explain when and why.
+
+### Restrict Domain, Don't Return Maybe
+
+When an operation is undefined for some inputs,
+*in general* restrict the domain in the type signature
+rather than returning `Maybe`.
+
+**Wrong approach:**
+
+```agda
+simdMul : ValType → Maybe SimdOp
+```
+
+**Proof-oriented approach:**
+
+```agda
+simdMul : SimdMulType t → SimdOp
+```
+
+`Maybe` pushes partiality to every caller.
+A restricted domain makes the precondition explicit
+and statically checked.
+This is a guideline not a hard rule;
+ask if you're in doubt.
 
 ## Code Integrity
 

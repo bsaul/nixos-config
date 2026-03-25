@@ -17,3 +17,9 @@
 | src/Language/Correctness.lagda.md | 2026-03-10 | 2026-03-10 12:45:59 | step1/step2 → equational reasoning; structural heading removed |
 | src/Language/Parse.lagda.md | 2026-03-10 | 2026-03-10 12:45:43 | Import grouping; structural heading; `deriv _≟_` refactor tracked as task |
 | src/Language/Examples/Strings.lagda.md | 2026-03-10 | 2026-03-10 12:28:35 | Not reviewed in detail (no annotations) |
+| [granite] src/Granite/LLVM/CostModel.lagda.md | 2026-03-18 | 2026-03-18 08:55:15 | Type-indexed costs, derive-from-target, dead branch field, where-import |
+| [granite] src/Granite/Wasm/CostModel.lagda.md | 2026-03-18 | 2026-03-18 09:00:46 | Type-indexed costs, repeated where-open cleanup |
+| [granite] src/Granite/PTX/CostModel.lagda.md | 2026-03-18 | 2026-03-17 20:57:52 | Same issues as LLVM (type-indexed, dead branch) |
+| [granite] src/Granite/Wasm/Base.lagda.md | 2026-03-18 | 2026-03-12 12:53:51 | Ephemeral prose, private vars consistency, Maybe→domain restriction |
+| [granite] src/Granite/Shared/Optimize.lagda.md | 2026-03-18 | 2026-03-17 20:48:26 | Duplicate flat scoring, maxDepth justification open question |
+| [granite] test/Granite/Test/Utilities.lagda.md | 2026-03-18 | 2026-03-07 14:51:22 | Generic serializeTestCase, remove trivial fromℕℤ wrapper |

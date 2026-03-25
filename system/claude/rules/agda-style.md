@@ -115,6 +115,20 @@ Use plain `-- comment` throughout.
 Do not use Haddock-style `-- | name: description` prefixes;
 they add no value in Agda files.
 
+### No Trivial Wrappers
+
+Do not create named wrappers around single stdlib functions.
+Use the stdlib name directly at call sites.
+
+**Wrong approach:**
+
+```agda
+fromℕℤ : ℕ → ℤ
+fromℕℤ n = + n
+```
+
+**Correct:** use `+_` directly.
+
 ### Properties Module Organization
 
 In a `Properties` module,
