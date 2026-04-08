@@ -12,12 +12,38 @@
       url = "github:nix-community/home-manager?ref=release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin/nix-darwin-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, sops-nix, home-manager, nur, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, sops-nix, home-manager, nix-darwin, nur, ... }@inputs:
   
   {
+
+    darwinConfigurations."TGTRWE-LT-0308" = nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      modules = [
+        ./darwin.nix
+
+        { nixpkgs.overlays = [ nur.overlays.default ]; }
+
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.extraSpecialArgs = {
+            pkgs-unstable = import nixpkgs-unstable {
+              system = "aarch64-darwin";
+              config.allowUnfree = true;
+            };
+          };
+          home-manager.backupFileExtension = "backup";
+          home-manager.users."bradley.saul".imports = [ ./home-darwin.nix ];
+        }
+      ];
+    };
 
     # Please replace my-nixos with your hostname
     nixosConfigurations.bsaul = nixpkgs.lib.nixosSystem {
