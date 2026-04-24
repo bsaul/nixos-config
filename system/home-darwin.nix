@@ -31,6 +31,7 @@
     pandoc
 
     # developer tools
+    uv
     vim
     wget
     nixpkgs-fmt
