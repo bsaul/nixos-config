@@ -38,6 +38,7 @@
               system = "aarch64-darwin";
               config.allowUnfree = true;
             };
+            gitEmail = "bsaul@targetrwe.com";
           };
           home-manager.backupFileExtension = "backup";
           home-manager.users."bradley.saul".imports = [ ./home-darwin.nix ];
@@ -66,6 +67,7 @@
                system = "x86_64-linux";
                config.allowUnfree = true;
              };
+             gitEmail = "bradleysaul@fastmail.com";
            };
            home-manager.sharedModules = [
               sops-nix.homeManagerModules.sops
