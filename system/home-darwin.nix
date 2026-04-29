@@ -13,6 +13,10 @@
     uv
   ];
 
+  home.file.".bash_profile".text = ''
+    exec zsh -l
+  '';
+
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;

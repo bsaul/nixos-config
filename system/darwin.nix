@@ -20,9 +20,12 @@
   # Determinate Systems manages the Nix installation; disable nix-darwin's management
   nix.enable = false;
 
+  programs.zsh.enable = true;
+
   users.users."bradley.saul" = {
     name = "bradley.saul";
     home = "/Users/bradley.saul";
+    shell = pkgs.zsh;
   };
 
   system.stateVersion = 5;
