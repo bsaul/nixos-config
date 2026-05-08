@@ -24,6 +24,7 @@
 
     # developer tools
     vim
+    neovim
     wget
     nixpkgs-fmt
     ripgrep
