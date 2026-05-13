@@ -25,6 +25,7 @@
     # developer tools
     vim
     neovim
+    nnn
     wget
     nixpkgs-fmt
     ripgrep
@@ -49,7 +50,7 @@
       _add_window() {
         local proj="$1"
         tmux new-window -t "$SESSION" -n "$proj" -c "$ROOT/$proj"
-        tmux send-keys -t "$SESSION:$proj" "nvim" C-m
+        tmux send-keys -t "$SESSION:$proj" "nnn" C-m
         tmux split-window -t "$SESSION:$proj" -h -c "$ROOT/$proj"
         tmux send-keys -t "$SESSION:$proj" "claude" C-m
         tmux select-layout -t "$SESSION:$proj" main-vertical
@@ -68,7 +69,7 @@
 
         if ! tmux has-session -t "$SESSION" 2>/dev/null; then
           tmux new-session -d -s "$SESSION" -n "$PROJ" -c "$ROOT/$PROJ"
-          tmux send-keys -t "$SESSION:$PROJ" "nvim" C-m
+          tmux send-keys -t "$SESSION:$PROJ" "nnn" C-m
           tmux split-window -t "$SESSION:$PROJ" -h -c "$ROOT/$PROJ"
           tmux send-keys -t "$SESSION:$PROJ" "claude" C-m
           tmux select-layout -t "$SESSION:$PROJ" main-vertical
@@ -104,7 +105,7 @@
 
       FIRST_PROJ=$(echo "$PROJECTS" | head -n 1)
       tmux new-session -d -s "$SESSION" -n "$FIRST_PROJ" -c "$ROOT/$FIRST_PROJ"
-      tmux send-keys -t "$SESSION:$FIRST_PROJ" "nvim" C-m
+      tmux send-keys -t "$SESSION:$FIRST_PROJ" "nnn" C-m
       tmux split-window -t "$SESSION:$FIRST_PROJ" -h -c "$ROOT/$FIRST_PROJ"
       tmux send-keys -t "$SESSION:$FIRST_PROJ" "claude" C-m
       tmux select-layout -t "$SESSION:$FIRST_PROJ" main-vertical
@@ -225,7 +226,7 @@
         tmux new-window -t "$SESSION" -n "$WIN_NAME" -c "$WT_DIR"
       fi
 
-      tmux send-keys -t "$SESSION:$WIN_NAME" "nvim" C-m
+      tmux send-keys -t "$SESSION:$WIN_NAME" "nnn" C-m
       tmux split-window -t "$SESSION:$WIN_NAME" -h -c "$WT_DIR"
       tmux send-keys -t "$SESSION:$WIN_NAME" "claude" C-m
       tmux select-layout -t "$SESSION:$WIN_NAME" main-vertical
